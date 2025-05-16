@@ -1,174 +1,200 @@
 ﻿# C-Users-jgalea922-Documents-semester-2-week-17-Day-4
-# C-Users-jgalea922-Documents-semester-2-week-17-Day-4
-# Video Game Search
 
-This project is a **Video Game Search Application** that allows users to search for video games by name or date it provides a clean and interactive user interface with features like theme toggling and responsive design
+# Game Searcher - CSS and JavaScript Code Explanation
 
-## Features
-
-- **Game Search**: Search for video games by entering the game name or date
-- **Dynamic Themes**: Toggle between light and dark modes with smooth transitions
-- **Responsive Design**: Adapts to various screen sizes, ensuring a great user experience
-- **Hover Effects**: Interactive hover animations for game cards and buttons
-- **Custom Styling**: Includes custom styles for a visually appealing layout
+This README explains all the **CSS** and **JavaScript** code for the "Game Searcher" application. The application lets users search a list of video games, toggle between light and dark themes, and tracks how long the user has stayed on the page.
 
 ---
 
-## How It Works
+## CSS Explanation
 
-1. **Search Bar**: Users can input a game name or date in the search bar to find relevant games.
-2. **Results Display**:
-   - Displays search results in a grid layout.
-   - Each game is shown in a **Game Card** with a hover effect.
-3. **Theme Toggle**:
-   - A button is provided to switch between light and dark themes
-   - The theme change is applied instantly with smooth transitions
+The CSS code is responsible for the look and feel of the application:
 
----
+- `body`  
+  - Uses a clean Arial font, sets a max width, centers the content, and adds padding.
+  - By default, background is white and text is black.
+  - When `.dark` class is added to the `<body>`, background becomes black and text becomes white.
+  - Smooth transitions for color/background-color changes.
 
-## Project Structure
+- `.container`  
+  - Adds space below containers.
 
-### HTML
-The main structure of the application is defined in the `index.html` file it includes
-- A header section with a logo title, and theme toggle button
-- A search bar for user input
-- A container for dynamically rendering search results
+- `.header`  
+  - Flexbox layout: aligns logo, title, and theme button in a row, spaced apart.
+  - Adds space below the header.
 
-### CSS
-Custom styles in the `<style>` tag define the layout, colors, and animations:
-- **Light Mode**: White background with black text
-- **Dark Mode**: Black background with white text
-- **Game Card** Styling:
-  - Rounded corners
-  - Hover effects with color inversion and elevation transform
+- `.header img`  
+  - Controls logo size.
 
-### JavaScript Files
-This project uses modular JavaScript files for different functionalities:
-- `greet.js`: Handles greeting logic
-- `game.js`: Contains the logic for managing game data
-- `render.js`: Renders the game cards in the results container
-- `theme.js`: Manages the theme toggling functionality
-- `timer.js`: Implements a timer or any time-related functionalities
-- `search.js`: Handles the search logic filtering games based on user input
+- `.Game-card`  
+  - Each game card has a black background, white text, padding, margin, rounded corners, and a slight shadow.
+  - On hover: background turns white, text turns black, and the card moves up a bit (`transform: translateY(-5px)`).
 
----
+- `#resultsContainer`  
+  - Uses CSS grid to lay out game cards in a 4-column grid with gaps.
 
-## How to Run
+- `input`  
+  - Styles the search box for padding, font, and width.
 
-1. Clone the repository to your local machine
-2. Open the `index.html` file in a browser
-3. Start using the search bar to look for video games and toggle themes as desired!
+- `button`  
+  - Button styling: cyan background, black text, rounded corners, no border.
+  - On hover: background turns dark cyan, button grows slightly.
 
-
-# Game Searcher
-
-Game Searcher is a dynamic web application that allows users to search, view, and explore a collection of games. It includes features for managing user preferences like dark mode, session timers, and personalized greetings.
-
-## Table of Contents
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Usage](#usage)
-- [Game Collection](#game-collection)
-- [Contributing](#contributing)
-- [License](#license)
+- `footer`  
+  - Simple centered footer text.
 
 ---
 
-## Features
+## JavaScript Explanation
 
-### Personalized Greeting
-- **New Visitors**: Welcomes new users with an alert and sets a cookie that expires in 7 days.
-- **Returning Visitors**: Displays a custom message for returning users by checking the cookie.
+All logic is handled in several scripts (shown here combined for explanation):
 
-### Search Functionality
-- Interactive search bar that filters games dynamically as the user types.
+### 1. Greet User with Cookie
 
-### Dark Mode
-- Toggle between light and dark themes.
-- Automatically saves the user's theme preference in `localStorage`.
-- Keyboard shortcut for toggling the theme: **Shift + D**.
-
-### Session Timer
-- Tracks the time a user spends on the page.
-- Displays a special message after 5 minutes, encouraging users to take a break.
-
-### Game Library
-- Displays a collection of games with details like title, rating, release date, and description.
-- Each game includes a "Details" button with a link to more information.
-
----
-
-## Technologies Used
-
-- **HTML5**: Structure and layout of the application.
-- **CSS3**: Styling and animations.
-- **JavaScript (ES6)**: Logic for interactivity and functionality.
-- **LocalStorage & SessionStorage**: For saving user preferences and session data.
-- **Cookies**: For tracking returning visitors.
+```js
+function greetUser(){
+    // Check if the "vistedBefore" cookie exists
+    const hasVistedBefore = document.cookie.includes('vistedBefore=true');
+    if(hasVistedBefore){
+        alert("👋 Welcome back to Game Search!");
+    }else{
+        // Set cookie to expire in 7 days
+        const expiryDate = new Date();
+        expiryDate.setDate(expiryDate.getDate()+ 7);
+        document.cookie = `vistedBefore=true;
+        expires=${expiryDate.toUTCString()}; path=/`
+        alert("⭐ Welcome to Game Search!");
+    }
+}
+greetUser();
+```
+- Shows a welcome message on the user's first visit, and a different one if they've been here before.
+- Sets a cookie that lasts for 7 days.
 
 ---
 
-## Usage
+### 2. The List of Games
 
-### 1. Running the App
-Simply open the application in a browser to start using Game Searcher.
-
-### 2. Searching Games
-Type keywords in the search bar to filter games by title or description.
-
-### 3. Switching Themes
-Click the **Theme Toggle** button or press **Shift + D** to switch between light and dark modes.
-
-### 4. Session Tracking
-A timer automatically starts when you visit the page, and a message is displayed after 5 minutes of activity.
+```js
+const Games = [ ... ];
+```
+- An array of game objects, each with a title, rating, description, image, and link.
+- Used as the main data source for rendering/searching.
 
 ---
 
-## Game Collection
+### 3. Rendering Games
 
-Here are some of the games available in the collection:
-
-1. **Marvel Rivals**: ★★★★☆  
-   Released on December 6, 2024. [Learn More](https://en.wikipedia.org/wiki/Marvel_Rivals)
-
-2. **Call of Duty**: ★★★★☆  
-   Began in 2003 and continues to evolve. [Learn More](https://en.wikipedia.org/wiki/Call_of_Duty)
-
-3. **Minecraft**: ★★★★★  
-   Released on May 17, 2009. [Learn More](https://en.wikipedia.org/wiki/Minecraft)
-
-4. **Elden Ring**: ★★★★★  
-   Released on February 25, 2022. [Learn More](https://en.wikipedia.org/wiki/Elden_Ring#:~:text=It%20was%20...)
-
-5. **God of War Ragnarok**: ★★★★★  
-   Released on November 9, 2022. [Learn More](https://en.wikipedia.org/wiki/God_of_War_Ragnar%C3%B6k)
-
-...and many more.
+```js
+function renderGames(Games){
+    ...
+    // Clear previous results
+    // If no games, show "No Games found"
+    // For each game, create a card (div), add image, title, rating, description, link
+    // Add all game cards to the page at once
+}
+renderGames(Games);
+```
+- Clears previous search results.
+- If no games match, shows a "No Games found" message.
+- For each game, creates a card with its details and a "Details" button linking to more info.
+- Adds all cards to the grid.
 
 ---
 
-## Contributing
+### 4. Search Functionality
 
-Contributions are welcome! If you’d like to improve the app or add features, follow these steps:
-1. Fork the repository.
-2. Create a new branch for your feature or bug fix.
-3. Commit your changes.
-4. Submit a pull request.
+```js
+function handleSearchInput() {
+    const searchInput = document.getElementById('searchInput');
+    const query = searchInput.value.toLowerCase();
+
+    // Filters games by title or description containing the search text
+    const filteredGames = Games.filter(game =>
+        game.Title.toLowerCase().includes(query) ||
+        game.Description.toLowerCase().includes(query)
+    );
+    renderGames(filteredGames);
+}
+document.getElementById('searchInput').addEventListener('input', handleSearchInput);
+```
+- As the user types in the search box, the list of games is filtered in real time.
+- Only games whose title or description matches the search are displayed.
 
 ---
 
-## License
+### 5. Theme Toggle (Light/Dark Mode)
 
-This project is open-source and licensed under the [MIT License](LICENSE).
+```js
+const themeToggle = document.getElementById('themeToggle');
+// Load theme from localStorage
+if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark');
+}
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    // Save preference
+    if (document.body.classList.contains('dark')) {
+        localStorage.setItem('theme', 'dark');
+    } else {
+        localStorage.setItem('theme', 'light');
+    }
+});
+// Keyboard shortcut: Shift + D to toggle theme
+document.addEventListener('keydown', (e) => {
+    if (e.shiftKey && e.key === 'D') {
+        themeToggle.click();
+    }
+});
+```
+- Clicking the "Toggle Theme" button switches between light and dark mode, and remembers the choice for next time.
+- Shift+D keyboard shortcut also toggles theme.
 
 ---
 
+### 6. Session Timer
+
+```js
+function startTimer() {
+    // Don't start another timer if one exists
+    // Starts at 0 seconds, updates every second
+    // Shows "Time on page: Xm Ys" at the bottom of the page
+    // Stores time in sessionStorage so it resets when tab is closed
+    // After 5 minutes, shows a message encouraging a break
+    // Message can be dismissed with a button
+}
+startTimer();
+```
+- Shows how long the user has been on the page, updates each second.
+- After 5 minutes, displays a friendly message to take a break ("touch grass!").
+- The session timer and message are managed with helper functions:
+  - `updateTimerDisplay` formats the timer.
+  - `showLongSessionMessage` displays the break message and a dismiss button.
+
 ---
 
-## Design Notes
+## File Organization
 
-- **Logo**: The `Gamer.png` file is used as the logo in the header.
-- **Styling**: CSS transitions are used for smooth animations and hover effects.
-- **JavaScript**: The application is modular, with each feature encapsulated in a specific file for maintainability.
+Assuming the code is split as referenced in the `<script src="..."></script>` tags:
 
+- `greet.js` - User greeting and cookie logic
+- `game.js`  - Game data array
+- `render.js` - Rendering games to the page
+- `search.js` - Search/filter logic
+- `theme.js`  - Theme toggle and persistence
+- `timer.js`  - Session timer and break reminder
 
+---
+
+## Summary
+
+- **CSS** handles layout, colors, transitions, and responsiveness.
+- **JavaScript** manages user interaction:
+  - Welcoming users with cookies
+  - Searching/filtering games
+  - Toggling light/dark themes (remembered for next visit)
+  - Tracking how long users spend on the page, with a break reminder
+
+All logic is designed to make the game search experience interactive and user-friendly, encouraging users to take breaks and giving them a customizable UI.
+
+---
