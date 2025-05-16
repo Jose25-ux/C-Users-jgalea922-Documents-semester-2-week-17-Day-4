@@ -2,108 +2,97 @@
 
 # Game Searcher - CSS and JavaScript Code Explanation
 
-This README explains all the **CSS** and **JavaScript** code for the "Game Searcher" application. The application lets users search a list of video games, toggle between light and dark themes, and tracks how long the user has stayed on the page.
+This README explains all the **CSS** and **JavaScript** code for the "Game Searcher" application. The application lets users search a list of video games, toggle between light and dark themes and tracks how long the user has stayed on the page.
 
 ---
-
 ## CSS Explanation
 
 The CSS code is responsible for the look and feel of the application:
 
+```css
+body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    color: black;
+    transition: background-color 0.3s, color 0.3s;
+}
 
-```  body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: white;
-            color: black;
-            transition: background-color 0.3s, color 0.3s;
-        }
+body.dark {
+    background-color: black;
+    color: white;
+}
 
- body.dark {
-            background-color: black;
-            color: white;
-        }
+.container {
+    margin-bottom: 20px;
+}
 
-        .container {
-            margin-bottom: 20px;
-        }
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
 
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
+.header img {
+    width: 180px;
+    height: 180px;
+}
 
-        .header img {
-            height: auto;
-            width: 180px;
-            height: 180px;
+.Game-card {
+    background-color: black;
+    color: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, color 0.3s;
+}
 
+.Game-card:hover {
+    background-color: white;
+    color: black;
+    transform: translateY(-5px);
+}
 
-        }
+#resultsContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
 
-       
+input {
+    padding: 8px;
+    font-size: 16px;
+    width: 300px;
+    margin-bottom: 10px;
+}
 
-        .Game-card {
-            background-color: black;
-            color: white;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            cursor: pointer;
- box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
- transition: background-color 0.3s, color 0.3s;
+button {
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: cyan;
+    color: black;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s, transform 0.3s;
+}
 
-        }
-        .Game-card:hover{
-            background-color: white;
-            color: black;
-            transform: translateY(-5px);
-        }
-       
+button:hover {
+    background-color: darkcyan;
+    transform: scale(1.1);
+}
 
-        #resultsContainer {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-           
-        }
-
-        input {
-            padding: 8px;
-            font-size: 16px;
-            width: 300px;
-            margin-bottom: 10px;
-        }
-
-        button {
-            padding: 8px 16px;
-            font-size: 16px;
-            background-color: cyan;
-            color: black;
-            border: none;
-            cursor: pointer;
-            border-radius: 4px;
-            transition:background-color 0.3s, transform 0.3s
-        }
-
-        button:hover {
-            background-color: darkcyan;
-            transform: scale(1.1);
-
-        }
-
-    
-        
-
-        footer {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 14px;
-        }```
+footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+}
+```
 
 - `body`  
   - Uses a clean Arial font, sets a max width, centers the content, and adds padding.
@@ -111,22 +100,15 @@ The CSS code is responsible for the look and feel of the application:
   - When `.dark` class is added to the `<body>`, background becomes black and text becomes white.
   - Smooth transitions for color/background-color changes.
 
-
-
-
 - `.container`  
   - Adds space below containers.
- 
-    
+
 - `.header`  
   - Flexbox layout: aligns logo, title, and theme button in a row, spaced apart.
   - Adds space below the header.
 
 - `.header img`  
   - Controls logo size.
-
-
-
 
 - `.Game-card`  
   - Each game card has a black background, white text, padding, margin, rounded corners, and a slight shadow.
